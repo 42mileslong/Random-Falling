@@ -31,7 +31,7 @@ public class Square {
 
 	public static void spawnNew() {
         int ranX = (int) (Math.random() * Main.gameWidth);
-        System.out.println("Random x is " + ranX);
+//        System.out.println("Random x is " + ranX);
         if (!Main.grid[ranX][Main.gameHeight -1].current) {
         	Main.grid[ranX][Main.gameHeight -1].current = true;
         	Main.grid[ranX][Main.gameHeight -1].drop();

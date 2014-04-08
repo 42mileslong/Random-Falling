@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -9,25 +10,30 @@ public class Main {
 	private static int currentRuns = 0;
 	public static boolean finishedRun = false;
 	private static int droppedSquares = 0;
+	private static ArrayList<Integer> droppedSquaresList = new ArrayList();
 
 	public static void main(String args[]) {
 		initialize();
-
-		while (currentRuns < 1) {
+		System.out.println("Run counts are:");
+		
+		while (currentRuns < 100) {
 			while (!finishedRun) {
 				Square.spawnNew();
 				Square.dropAll();
 				droppedSquares++;
 				checkClearLine();
-				printGrid();
-				System.out.println();
+//				printGrid();
+//				System.out.println();
 			}
-			System.out.println("Run " + currentRuns + " count is " + droppedSquares);
+			System.out.println(droppedSquares);
+			droppedSquaresList.add(droppedSquares);
 			currentRuns++;
 			finishedRun = false;
 			droppedSquares = 0;
 			Square.clearGrid();
 		}
+		
+		System.out.println("Average dropped squares are " + findAverage());
 	}
 
 	private static void initialize() {
@@ -84,5 +90,13 @@ public class Main {
 			grid[x][y].current = false;
 		}
 		Square.dropAll();
+	}
+	
+	private static double findAverage() {
+		double total = 0;
+		for (int i = 0; i < droppedSquaresList.size(); i++) {
+			total += droppedSquaresList.get(i);
+		}
+		return (total/droppedSquaresList.size());
 	}
 }
