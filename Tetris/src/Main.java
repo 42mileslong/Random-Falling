@@ -22,8 +22,8 @@ public class Main {
 				printGrid();
 				System.out.println();
 			}
-			currentRuns++;
 			System.out.println("Run " + currentRuns + " count is " + droppedSquares);
+			currentRuns++;
 			finishedRun = false;
 			droppedSquares = 0;
 			Square.clearGrid();
@@ -70,11 +70,11 @@ public class Main {
 	private static void checkClearLine() {
 		boolean allAlive = true;
 		for (int x = 0; x < gameWidth; x++) {
-			if (grid[x][0].current) {
+			if (!grid[x][0].current) {
 				allAlive = false;
 			}
 		}
-		if (allAlive = true) { 
+		if (allAlive) { 
 			clearLine(0);
 		}
 	}

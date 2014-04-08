@@ -14,12 +14,14 @@ public class Square {
 	public static void dropAll() {
 		for (int x = 0; x < Main.gameWidth; x++) {
 			for (int y = 0; y < Main.gameHeight; y++) {
-				Main.grid[x][y].drop();
+				if (Main.grid[x][y].current) {
+					Main.grid[x][y].drop();
+				}
 			}
 		}
 	}
 
-	private void drop() {
+	public void drop() {
 		if (this.y > 0 && !this.below.current) {
 			this.current = false;
 			this.below.current = true;
