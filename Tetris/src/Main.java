@@ -95,19 +95,6 @@ public class Main {
 		}
 	}
 	
-	@SuppressWarnings("unused")
-	//prints the grid for testing purposes
-	private static void printGrid() {
-		for (int y = gameHeight -1; y >= 0; y--) { //inverted gameHeight loop, so lines printed will be in order
-			for (int x = 0; x < Main.gameWidth; x++) { //loops of gameWidth
-				if (grid[x][y].current) System.out.print("1 "); //if there is a square, it prints `1`
-				if (!grid[x][y].current) System.out.print("0 "); //if there is not a square, it prints `0`
-			}
-			System.out.println(); //makes a new line (so each line will be on a new line)
-		}
-		System.out.println(); //makes a space after the printed grid
-	}
-	
 	//checks to see whether the bottom line is ready to be cleared, and because only one square is dropping at a time it doesn't have to check all of the lines
 	private static void checkClearLine() {
 		boolean allAlive = true; //a variable that assumes there are squares in all the tiles in the line
@@ -136,5 +123,19 @@ public class Main {
 			total += droppedSquaresList.get(i); //adds the dropped square to total
 		}
 		return (total/droppedSquaresList.size()); //returns total divided by the number of dropped squares
+	}
+	
+	
+	@SuppressWarnings("unused")
+	//prints the grid for testing purposes
+	private static void printGrid() {
+		for (int y = gameHeight -1; y >= 0; y--) { //inverted gameHeight loop, so lines printed will be in order
+			for (int x = 0; x < Main.gameWidth; x++) { //loops of gameWidth
+				if (grid[x][y].active) System.out.print("1 "); //if there is a square, it prints `1`
+				if (!grid[x][y].active) System.out.print("0 "); //if there is not a square, it prints `0`
+			}
+			System.out.println(); //makes a new line (so each line will be on a new line)
+		}
+		System.out.println(); //makes a space after the printed grid
 	}
 }
