@@ -1,26 +1,54 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+ * Random Falling
+ * Coded by Rafi Long
+ * Reviewed by Phil Long
+ * 
+ * This program is meant to calculate the average amount of squares dropped in a Tetris game if each gamepiece, or Tetrimo, was a single square.
+ * However, this program allows you to change the gameboard width.
+ * 
+ * View the graphed data below:
+ * https://docs.google.com/presentation/d/197B9tDgbns_cOALpqiPZdx58X_jv4NQK8UDJqL6JUAQ/edit?usp=sharing
+ * 
+ * Read about the classes at the top of each file.
+ * As always, documentation of the code is in the code.
+ * Thank you for checking out my code! I hope you have fun!
+ */
+
+/*
+ * Terms:
+ * Grid - A grid of `tiles` (see below) of height 22 and variable width.
+ * Tile - A space in the `grid` (see above) where `squares` (see below) can potentially be.
+ * Square - A space on the `grid` (see above) that is occupied. In other words, an active `tile`.
+ * Run - What would be called a tetris `game`. A cycle, started by the spawning of one block and ending with one column of `squares` (see above) reaching the top.
+ */
+
+/*
+ * Class: Main
+ * Purpose: to perform calculations and provide user input and output
+ */
 
 public class Main {
 	/* Grid variables */
-	public static int gameHeight = 22; //contains the game height - 22
-	public static int gameWidth = input("What is the width of the gameboard?"); //gets the game width, which is variable, from the user, calling input()
+	public static int gameHeight = 22; //contains the game height (22), the number of tiles spanning the height of the grid
+	public static int gameWidth = input("What is the width of the gameboard?"); //contains the game width, the number of tiles spanning the width of the grid, by calling input()
 	public static Square[][] grid = new Square[gameWidth][gameHeight]; //makes a grid with the width and height of above variables
 
 	/* Calculation variables */
-	private static int currentRuns = 0; //stores the current amount of runs
-	private static int totalRuns = 5; //stores how many runs the user wants
-	public static boolean finishedRun = false; //stores whether the run has finished, and is set by the method Square.spawnNew() when it tries to spawn a square in a square
-	private static int droppedSquares = 0; //stores the amount of squares dropped (is increased whenever a new block is spawned)
+	private static int currentRuns = 0; //stores how many runs have been eclipsed
+	private static int totalRuns = 5; //stores the total amount of runs
+	public static boolean finishedRun = false; //stores whether the current run has finished (set by the method Square.spawnNew() when it tries to spawn a square in a tile that already contains a square)
+	private static int droppedSquares = 0; //stores the amount of squares dropped (increased whenever a new block is spawned)
 	private static ArrayList<Integer> droppedSquaresList = new ArrayList<Integer>(); //stores the amount of squares dropped for all of the runs
 
 	public static void main(String args[]) {
 		initialize(); //initializes the grid
-		System.out.println("Run counts are:"); //tells the user that the below numbers are the number of blocks dropped for each run
+		System.out.println("Run counts are:"); //tells the user that the below numbers are the number of squares dropped for each run
 		
 		while (currentRuns < totalRuns) { //this loops until there have been the same number of runs as the variable totalRuns
-			while (!finishedRun) { //this loops until Square.spawnNew() stops it when it spawns a square in a square
+			while (!finishedRun) { //this loops until Square.spawnNew() stops it when it spawns a square in a tile containing a square
 				Square.spawnNew(); //spawns a new square
 				Square.dropAll(); //checks to drop all squares, but the only square effected is the new square
 				droppedSquares++; //adds a new square to the list of dropped squares
@@ -82,7 +110,7 @@ public class Main {
 	
 	//checks to see whether the bottom line is ready to be cleared, and because only one square is dropping at a time it doesn't have to check all of the lines
 	private static void checkClearLine() {
-		boolean allAlive = true; //a variable that assumes all the squares in the line are alive
+		boolean allAlive = true; //a variable that assumes there are squares in all the tiles in the line
 		for (int x = 0; x < gameWidth; x++) { //loops for gameWidth
 			if (!grid[x][0].current) { //if there is not a square in the x
 				allAlive = false; //sets all alive to false

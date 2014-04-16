@@ -1,9 +1,20 @@
+/*
+ * Random Falling
+ * Coded by Rafi Long
+ * 
+ * See Main.java more for documentation
+ */
+
+/*
+ * Class: Square
+ * Purpose: to provide a Square object and manipulation of that object
+ */
 
 public class Square {
-	public boolean current; //a variable for holding whether there is a square in the square (if there is no square, the square variable will still be in the grid, but `current` will be set to false)
+	public boolean active; //a variable for holding whether there is a square in the tile
 	public int x; //a variable for holding the x
 	public int y; //a variable for holding the y
-	public Square below; //holds the square the square
+	public Square below; //a pointer to the square in the tile beneath the current square
 
 	//a constructor, with the arguments of the x and y
 	public Square(int x, int y) { 
