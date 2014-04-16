@@ -18,7 +18,7 @@ public class Square {
 
 	//a constructor, with the arguments of the x and y
 	public Square(int x, int y) { 
-		this.current = false; //sets current to be false (there is no square there yet)
+		this.active = false; //sets active to be false (there is no square there yet)
 		this.x = x; //sets x to the x argument
 		this.y = y; //sets y to the y argument
 	}
@@ -27,7 +27,7 @@ public class Square {
 	public static void dropAll() {
 		for (int x = 0; x < Main.gameWidth; x++) { //loops for gameWidth
 			for (int y = 0; y < Main.gameHeight; y++) { //loops for gameHeight
-				if (Main.grid[x][y].current) { //if there is a square in the `square`
+				if (Main.grid[x][y].active) { //if there is a square in the `square`
 					Main.grid[x][y].drop(); //calls drop for the square
 				}
 			}
@@ -36,29 +36,29 @@ public class Square {
 
 	//tries to drop the square
 	public void drop() {
-		if (this.y > 0 && !this.below.current) { //if the square below doesn't have a square
-			this.current = false; //sets the square to be false
-			this.below.current = true; //sets the below square to be true
+		if (this.y > 0 && !this.below.active) { //if the tile below doesn't have a square
+			this.active = false; //sets the current square to be false
+			this.below.active = true; //sets the tile beneath the current square to be active
 			this.below.drop(); //tries to drop the below square
 		}
 	}
 
-	//spawns a new square randomly on the top
+	//spawns a new square randomly on the top of the grid
 	public static void spawnNew() {
         int ranX = (int) (Math.random() * Main.gameWidth); //sets the ranX variable to equal a random number between 0 and the gameWidth
-        if (!Main.grid[ranX][Main.gameHeight -1].current) { //if there isn't a square in the square
-        	Main.grid[ranX][Main.gameHeight -1].current = true; //sets the square to be true
+        if (!Main.grid[ranX][Main.gameHeight -1].active) { //if there isn't a square in the chosen tile
+        	Main.grid[ranX][Main.gameHeight -1].active = true; //sets the tile, and therefore the square, to be true
         	Main.grid[ranX][Main.gameHeight -1].drop(); //tries to drop the square
-        } else { //if there is a square already when it tries to spawn a square
+        } else { //if there is a square already in the tile when it tries to spawn a square
         	Main.finishedRun = true; //sets the finishedRun to be true
         }
 	}
 
-	//clears the grid
+	//clears the grid (used after a run is finished
 	public static void clearGrid() {
 		for (int x = 0; x < Main.gameWidth; x++) { //for the gameWidth
 			for (int y = 0; y < Main.gameHeight; y++) { //for the gameHeight
-				Main.grid[x][y].current = false; //sets all squares.current to false
+				Main.grid[x][y].active = false; //sets all squares.active to false
 			}
 		}
 	}

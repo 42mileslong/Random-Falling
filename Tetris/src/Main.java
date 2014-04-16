@@ -99,7 +99,7 @@ public class Main {
 	private static void checkClearLine() {
 		boolean allAlive = true; //a variable that assumes there are squares in all the tiles in the line
 		for (int x = 0; x < gameWidth; x++) { //loops for gameWidth
-			if (!grid[x][0].current) { //if there is not a square in the x
+			if (!grid[x][0].active) { //if there is not a square in the x
 				allAlive = false; //sets all alive to false
 			}
 		}
@@ -111,7 +111,7 @@ public class Main {
 	//removes square from a current line and drops the rest
 	private static void clearLine(int y) {
 		for (int x = 0; x < gameWidth; x++) { //loops for gameWidth
-			grid[x][y].current = false; //sets the grid in the x position to false, using the argument y for the y variable
+			grid[x][y].active = false; //sets the square in the current position to false, indicating that there is no square there, and only an empty tile
 		}
 		Square.dropAll(); //drops all of the squares
 	}
