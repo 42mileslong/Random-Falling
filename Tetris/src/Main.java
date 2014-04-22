@@ -30,52 +30,76 @@ import java.util.Scanner;
  * Purpose: to perform calculations and provide user input and output
  */
 
+/**
+ * Performs calculations and interprets user input
+ *
+ * @author Rafi Long
+ * @see Tile
+ * @see Grid
+ *
+ * @version 1
+ * @since 0.1
+ */
 public class Main {
-	/* Grid variables */
-	public static int gameHeight = 22;
-	public static int gameWidth = input("What is the width of the gameboard?");
-	public static Square[][] grid = new Square[gameWidth][gameHeight];
-
-	/* Calculation variables */
+    /**
+     * Stores the amount of total runs
+     */
 	private static int totalRuns = 5;
+
+    /**
+     * Stores whether the current run is finished
+     */
 	public static boolean finishedRun = false;
+
+    /**
+     * Stores the amount of dropped squares for the current run
+     */
 	private static int droppedSquares = 0;
+
+    /**
+     * Stores the total amount of dropped squares
+     */
+    //TODO remove array list and replace with an int
 	private static ArrayList<Integer> droppedSquaresList = new ArrayList<Integer>();
 
+    /**
+     * The grid that all calculations are run on
+     */
+    private static Grid grid = new Grid();
+
+    /**
+     * Initializes the grid and runs methods to run the simulation
+     *
+     * @param args unused parameter
+     */
 	public static void main(String args[]) {
-		initialize();
+		grid.initialize();
 		System.out.println("Run counts are:");
 		
 		for (int i = 0; i < totalRuns; i++) {
 			while (!finishedRun) {
-				Square.spawnNew();
-				Square.dropAll();
+				grid.spawnNew();
+                //TODO check whether this is necessary
+				grid.dropAll();
 				droppedSquares++;
-				checkClearLine();
+				grid.checkClearLine();
 			}
 			System.out.println(droppedSquares);
 			droppedSquaresList.add(droppedSquares);
 			finishedRun = false;
 			droppedSquares = 0;
-			Square.clearGrid();
+			grid.clearGrid();
 		}
 		System.out.println("Average dropped squares are " + findAverage());
 	}
 
-	private static void initialize() {
-		for (int x = 0; x < gameWidth; x++) {
-			for (int y = 0; y < Main.gameHeight; y++) {
-				grid[x][y] = new Square(x, y);
-				if (y > 0) {
-					grid[x][y].below = grid[x][y-1];
-				} else {
-					grid[x][y].below = null;
-				}
-			}
-		}
-	}
-
-	private static int input(String question) {
+    /**
+     * Asks a question and gets user input by using a scanner
+     *
+     * @param question Prints the question before opening a scanner
+     * @return The scanner
+     */
+	public static int input(String question) {
 		System.out.println(question);
 		Scanner sc = new Scanner(System.in);
 		String text = sc.nextLine();
@@ -88,43 +112,16 @@ public class Main {
 		}
 	}
 
-	private static void checkClearLine() {
-		boolean allAlive = true;
-		for (int x = 0; x < gameWidth; x++) {
-			if (!grid[x][0].active) {
-				allAlive = false;
-			}
-		}
-		if (allAlive) {
-			clearLine(0);
-		}
-	}
-
-	private static void clearLine(int y) {
-		for (int x = 0; x < gameWidth; x++) {
-			grid[x][y].active = false;
-		}
-		Square.dropAll();
-	}
-
+    /**
+     * Finds the average blocks dropped
+     *
+     * @return The average number of blocks dropped
+     */
 	private static double findAverage() {
 		double total = 0;
         for (Integer aDroppedSquaresList : droppedSquaresList) {
             total += aDroppedSquaresList;
         }
 		return (total/droppedSquaresList.size());
-	}
-	
-	
-	@SuppressWarnings("unused")
-	private static void printGrid() {
-		for (int y = gameHeight -1; y >= 0; y--) {
-			for (int x = 0; x < Main.gameWidth; x++) {
-				if (grid[x][y].active) System.out.print("1 ");
-				if (!grid[x][y].active) System.out.print("0 ");
-			}
-			System.out.println();
-		}
-		System.out.println();
 	}
 }
