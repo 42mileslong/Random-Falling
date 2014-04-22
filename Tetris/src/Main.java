@@ -25,11 +25,6 @@ import java.util.Scanner;
  * Run - What would be called a tetris `game`. A cycle, started by the spawning of one block and ending with one column of `squares` (see above) reaching the top.
  */
 
-/*
- * Class: Main
- * Purpose: to perform calculations and provide user input and output
- */
-
 /**
  * Performs calculations and interprets user input
  *
