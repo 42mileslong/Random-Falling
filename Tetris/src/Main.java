@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
- * Testing git
- *
  * Random Falling
  * Coded by Rafi Long
  * Reviewed by Phil Long
@@ -39,7 +37,6 @@ public class Main {
 	public static Square[][] grid = new Square[gameWidth][gameHeight]; //makes a grid with the width and height of above variables
 
 	/* Calculation variables */
-	private static int currentRuns = 0; //stores how many runs have been eclipsed
 	private static int totalRuns = 5; //stores the total amount of runs
 	public static boolean finishedRun = false; //stores whether the current run has finished (set by the method Square.spawnNew() when it tries to spawn a square in a tile that already contains a square)
 	private static int droppedSquares = 0; //stores the amount of squares dropped (increased whenever a new block is spawned)
@@ -49,7 +46,7 @@ public class Main {
 		initialize(); //initializes the grid
 		System.out.println("Run counts are:"); //tells the user that the below numbers are the number of squares dropped for each run
 		
-		while (currentRuns < totalRuns) { //this loops until there have been the same number of runs as the variable totalRuns
+		for (int i = 0; i < totalRuns; i++) { //this loops until there have been the same number of runs as the variable totalRuns
 			while (!finishedRun) { //this loops until Square.spawnNew() stops it when it spawns a square in a tile containing a square
 				Square.spawnNew(); //spawns a new square
 				Square.dropAll(); //checks to drop all squares, but the only square effected is the new square
@@ -60,7 +57,6 @@ public class Main {
 			//once the run finishes...
 			System.out.println(droppedSquares); //prints the number of dropped squares
 			droppedSquaresList.add(droppedSquares); //adds the number of dropped squares to the array droppedSquaresList
-			currentRuns++; //increases the number of runs
 			finishedRun = false; //resets finishedRun
 			droppedSquares = 0; //resets the number of dropped squares
 			Square.clearGrid(); //clears the grid, getting ready for a new run
@@ -121,9 +117,9 @@ public class Main {
 	//finds the average number of dropped squares
 	private static double findAverage() {
 		double total = 0; //a variable to hold the total of all dropped squares
-		for (int i = 0; i < droppedSquaresList.size(); i++) { //loops for the size of droppedSquaresList
-			total += droppedSquaresList.get(i); //adds the dropped square to total
-		}
+        for (Integer aDroppedSquaresList : droppedSquaresList) { //loops for the size of droppedSquaresList
+            total += aDroppedSquaresList; //adds the dropped square to total
+        }
 		return (total/droppedSquaresList.size()); //returns total divided by the number of dropped squares
 	}
 	
