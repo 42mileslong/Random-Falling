@@ -39,7 +39,7 @@ public class Main {
     /**
      * Stores the amount of total runs
      */
-	private static int totalRuns = 5;
+	private static int totalRuns = 50;
 
     /**
      * Stores whether the current run is finished
@@ -74,8 +74,6 @@ public class Main {
 		for (int i = 0; i < totalRuns; i++) {
 			while (!finishedRun) {
 				grid.spawnNew();
-                //TODO check whether this is necessary
-				grid.dropAll();
 				droppedSquares++;
 				grid.checkClearLine();
 			}
