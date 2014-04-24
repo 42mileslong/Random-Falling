@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -54,8 +53,7 @@ public class Main {
     /**
      * Stores the total amount of dropped squares
      */
-    //TODO remove array list and replace with an int
-	private static ArrayList<Integer> droppedSquaresList = new ArrayList<Integer>();
+	private static int totalDroppedSquares = 0;
 
     /**
      * The grid that all calculations are run on
@@ -78,7 +76,7 @@ public class Main {
 				grid.checkClearLine();
 			}
 			System.out.println(droppedSquares);
-			droppedSquaresList.add(droppedSquares);
+			totalDroppedSquares += droppedSquares;
 			finishedRun = false;
 			droppedSquares = 0;
 			grid.clearGrid();
@@ -111,10 +109,6 @@ public class Main {
      * @return The average number of blocks dropped
      */
 	private static double findAverage() {
-		double total = 0;
-        for (Integer aDroppedSquaresList : droppedSquaresList) {
-            total += aDroppedSquaresList;
-        }
-		return (total/droppedSquaresList.size());
+		return (totalDroppedSquares/totalRuns);
 	}
 }
