@@ -38,7 +38,7 @@ public class Main {
     /**
      * Stores the amount of total runs
      */
-	private static int totalRuns = 500;
+	private static int totalRuns = 1000000;
 
     /**
      * Whether you want individual run information
@@ -107,6 +107,6 @@ public class Main {
      * @return The average number of blocks dropped
      */
 	private static double findAverage() {
-		return (totalDroppedSquares/totalRuns);
+		return (totalDroppedSquares/(double)totalRuns);
 	}
 }
