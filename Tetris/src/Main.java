@@ -41,11 +41,6 @@ public class Main {
 	private static int totalRuns = 50;
 
     /**
-     * Stores whether the current run is finished
-     */
-	public static boolean finishedRun = false;
-
-    /**
      * Stores the amount of dropped squares for the current run
      */
 	private static int droppedSquares = 0;
@@ -70,14 +65,12 @@ public class Main {
 		System.out.println("Run counts are:");
 		
 		for (int i = 0; i < totalRuns; i++) {
-			while (!finishedRun) {
-				grid.spawnNew();
+			while (grid.spawnNew()) {
 				droppedSquares++;
 				grid.checkClearLine();
 			}
 			System.out.println(droppedSquares);
 			totalDroppedSquares += droppedSquares;
-			finishedRun = false;
 			droppedSquares = 0;
 			grid.clearGrid();
 		}

@@ -113,14 +113,16 @@ public class Grid {
      * Calls the Tile drop method for the tile
      *
      * @see Tile#drop()
+     * @return Returns whether a tile was successfully dropped
      */
-    public void spawnNew() {
+    public Boolean spawnNew() {
         int ranX = (int) (Math.random() * gameWidth);
         if (!grid[ranX][gameHeight -1].active) {
             this.grid[ranX][gameHeight -1].active = true;
             this.grid[ranX][gameHeight -1].drop();
+            return true;
         } else {
-            Main.finishedRun = true;
+            return false;
         }
     }
 
