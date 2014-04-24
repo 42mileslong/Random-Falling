@@ -36,32 +36,32 @@ import java.util.Scanner;
  */
 public class Main {
     /**
-     * Stores the amount of total runs
+     * The amount of total runs.
      */
 	private static int totalRuns = 1000000;
 
     /**
-     * Whether you want individual run information
+     * Activates individual run information
      */
     private static boolean individRun = false;
 
     /**
-     * Amount of dropped squares for the current run
+     * Amount of dropped squares for the current run.
      */
 	private static int droppedSquares = 0;
 
     /**
-     * Stores the total amount of dropped squares
+     * The total amount of dropped squares.
      */
 	private static int totalDroppedSquares = 0;
 
     /**
-     * The grid that all calculations are run on
+     * The grid that all calculations are run on.
      */
     private static Grid grid = new Grid();
 
     /**
-     * Initializes the grid and runs methods to run the simulation
+     * Initializes the grid and runs methods to run the simulation.
      *
      * @param args unused parameter
      */
@@ -83,7 +83,7 @@ public class Main {
 	}
 
     /**
-     * Asks a question and gets user input by using a scanner
+     * Prints a question and gets user input by using a scanner.
      *
      * @param question Prints the question before opening a scanner
      * @return The scanner
@@ -102,7 +102,7 @@ public class Main {
 	}
 
     /**
-     * Finds the average blocks dropped
+     * Finds the average blocks dropped.
      *
      * @return The average number of blocks dropped
      */
