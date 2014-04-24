@@ -38,10 +38,15 @@ public class Main {
     /**
      * Stores the amount of total runs
      */
-	private static int totalRuns = 50;
+	private static int totalRuns = 500;
 
     /**
-     * Stores the amount of dropped squares for the current run
+     * Whether you want individual run information
+     */
+    private static boolean individRun = false;
+
+    /**
+     * Amount of dropped squares for the current run
      */
 	private static int droppedSquares = 0;
 
@@ -62,14 +67,14 @@ public class Main {
      */
 	public static void main(String args[]) {
 		grid.initialize();
-		System.out.println("Run counts are:");
+		if (individRun) System.out.println("Run counts are:");
 		
 		for (int i = 0; i < totalRuns; i++) {
 			while (grid.spawnNew()) {
 				droppedSquares++;
 				grid.checkClearLine();
 			}
-			System.out.println(droppedSquares);
+			if (individRun) System.out.println(droppedSquares);
 			totalDroppedSquares += droppedSquares;
 			droppedSquares = 0;
 			grid.clearGrid();
