@@ -22,6 +22,7 @@ public class Grid {
      * Default is 22
      */
     public static int gameHeight = 22;
+    //TODO find out height effects number of blocks that fall
 
     /**
      * Width of the grid
