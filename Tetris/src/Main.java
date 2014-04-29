@@ -15,8 +15,7 @@
  * Read about the classes at the top of each file.
  * As always, documentation of the code is in the code.
  * Thank you for checking out my code! I hope you have fun!
- */
-/*
+ *
  * Terms:
  * Grid - A grid of `tiles` (see below) of height 22 and variable width.
  * Tile - A space in the `grid` (see above) where `squares` (see below) can potentially be.
