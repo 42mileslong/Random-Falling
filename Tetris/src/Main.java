@@ -40,7 +40,7 @@ public class Main {
     /**
      * The amount of total runs.
      */
-	private static int totalRuns = 1000000;
+	private static int totalRuns;
 
     /**
      * Activates individual run information
@@ -68,6 +68,7 @@ public class Main {
      * @param args unused parameter
      */
 	public static void main(String args[]) {
+        totalRuns = input("How many runs do you want?");
 		grid.initialize();
 		if (individRun) System.out.println("Run counts are:");
 		
@@ -94,7 +95,6 @@ public class Main {
 		System.out.println(question);
 		Scanner sc = new Scanner(System.in);
 		String text = sc.nextLine();
-		sc.close();
 		try {
 			return Integer.parseInt(text);
 		} catch (NumberFormatException e) {
